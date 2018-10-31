@@ -1,0 +1,268 @@
+package Herencia_Product;
+
+public interface IProducto 
+{	
+	public double getdarPrecioVenta();
+	
+}
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+package Herencia_Product;
+import java.util.Scanner;
+
+public class Producto implements IProducto {
+
+	private int num_Lote;
+	private String nom_Prod;
+	private String fecha_Cad;
+	private String info_Esp;
+	private double valor;
+	
+	// constructor producto
+	
+	public Producto() {	}
+	
+	// constructor persona con parametros
+	
+	public Producto(int num_Lote,String nom_Prod,String fecha_Cad,String info_Esp,double valor) {
+		this.num_Lote=num_Lote;
+		this.nom_Prod=nom_Prod;
+		this.fecha_Cad=fecha_Cad;
+		this.info_Esp=info_Esp;	
+		this.valor=valor;
+	}
+	
+	//metodos getters y setters
+	public int getNum_Lote() {
+		return num_Lote;
+	}
+
+	public void setNum_Lote(int num_Lote) {
+		this.num_Lote = num_Lote;
+	}
+
+	public String getNom_Prod() {
+		return nom_Prod;
+	}
+
+	public void setNom_Prod(String nom_Prod) {
+		this.nom_Prod = nom_Prod;
+	}
+
+	public String getFecha_Cad() {
+		return fecha_Cad;
+	}
+
+	public void setFecha_Cad(String fecha_Cad) {
+		this.fecha_Cad = fecha_Cad;
+	}
+
+	public String getInfo_Esp() {
+		return info_Esp;
+	}
+
+	public void setInfo_Esp(String info_Esp) {
+		this.info_Esp = info_Esp;
+	}
+	
+	public double Valor() {
+		return valor;
+	}
+
+	public void Valor(int valor) {
+		this.valor = valor;
+	}
+	 @Override
+		public double getdarPrecioVenta() {
+			return valor;
+		}
+	 
+	//metodo mostrar
+	
+	 public void mostrar(){		 
+		 System.out.println("\nSe ingreso el producto: "+getNom_Prod()+" lote #: "+
+					getNum_Lote()+" fecha de caducidad: "+getFecha_Cad()+
+			" informacion especifica: "+getInfo_Esp()+" valor del producto: "+getdarPrecioVenta());
+	    } 
+	 
+	
+	//metodo leer
+	
+	public void leer() {
+		Scanner teclado=new Scanner(System.in);
+		System.out.print("\nIngrese el nombre del producto: ");
+		this.nom_Prod=teclado.nextLine();
+		System.out.print("Ingrese el numero de lote del producto: ");
+		this.num_Lote=teclado.nextInt();
+		System.out.print("Ingrese el valor del producto: ");
+		this.valor=teclado.nextDouble();
+		teclado.nextLine(); //limpiar el intro
+		System.out.print("Ingrese la fecha de caducidad del producto: ");
+		this.fecha_Cad=teclado.nextLine();
+		System.out.print("Ingrese la informacion especifica del producto: ");
+		this.info_Esp=teclado.nextLine();		
+	}	
+	
+}
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+package Herencia_Product;
+import java.util.Scanner;
+
+public class P_Fresco extends Producto {
+	private String fecha_Env;
+	private String pais_Origen;
+	 
+	// constructor p_Fresco
+	public P_Fresco() {
+		//ejecutando el constructor p_Fresco
+		 System.out.println("\nProducto fresco: ");
+	}
+	//constructor con parametros
+	public P_Fresco(int num_Lote,String nom_Prod,String fecha_Cad,String info_Esp,double valor,String fecha_Env, String pais_origen) {
+		super(num_Lote,nom_Prod,fecha_Cad,info_Esp,valor);
+		this.fecha_Env=fecha_Env;
+		this.pais_Origen=pais_origen;		
+	}
+	
+	// metodos getters y setters
+	
+	public String getFecha_Env() {
+		return fecha_Env;
+	}
+	public void setFecha_Env(String fecha_Env) {
+		this.fecha_Env = fecha_Env;
+	}
+	public String getPais_Origen() {
+		return pais_Origen;
+	}
+	public void setPais_Origen(String pais_Origen) {
+		this.pais_Origen = pais_Origen;
+	}
+	
+	@Override
+	public void mostrar(){
+		System.out.println("\nProducto fresco: ");
+		super.mostrar();
+		System.out.println("fecha de envasado: "+getFecha_Env()+" pais de origen: "+getPais_Origen());		
+	}
+	
+	@Override // modifica metodo heredado
+	public void leer(){
+		Scanner teclado=new Scanner(System.in);
+		super.leer();
+		System.out.print("ingrese la fecha de envasado del producto: ");
+		this.fecha_Env=teclado.nextLine();//se lee la fecha de envasado del producto
+		System.out.print("Ingrese el pais de origen del producto: ");
+		this.pais_Origen=teclado.nextLine();// se lee el pais de origen del producto	
+		
+	}	
+}
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+package Herencia_Product;
+import java.util.Scanner;
+
+public class P_Congelado  extends Producto {
+	private int temp_Cong;
+	
+	// constructor P_Congelado
+	public P_Congelado() {
+		System.out.println("\nProducto congelado: ");
+	}
+	
+	//constructor con parametros
+	//super:hacemos referencia al constructor que tiene la clase Padre	
+	public P_Congelado(int num_Lote,String nom_Prod,String fecha_Cad,double valor,String info_Esp,int tem_Cong) {
+		super(num_Lote,nom_Prod,fecha_Cad,info_Esp,valor);
+		this.temp_Cong=tem_Cong;
+	}
+	
+	//metodos getter y setter
+	public int getTemp_Cong() {
+		return temp_Cong;
+	}
+	public void setTemp_Cong(int temp_Cong) {
+		this.temp_Cong = temp_Cong;
+	}
+	
+	//metodo mostrar
+		@Override
+		public void mostrar(){
+			System.out.println("\nProducto congelado: ");
+			super.mostrar();
+			System.out.println(" temperatura recomendad: "+getTemp_Cong()+ " grados");
+	}
+	
+	@Override
+	public void leer() {
+		Scanner teclado=new Scanner(System.in);
+		super.leer();
+		System.out.print("ingrese la temperatura recomendad del producto: ");
+		temp_Cong=teclado.nextInt();
+	}	
+
+}
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+package Herencia_Product;
+import java.util.Scanner;
+
+public class P_Refrigerado extends Producto {
+	private int cod_Sup;
+	
+	// constructor de P_Refrigerado
+	public P_Refrigerado() {
+		System.out.println("\nProducto refrigerado: ");
+	}	
+	public P_Refrigerado(int num_Lote,String nom_Prod,String fecha_Cad,String info_Esp,Double valor,int cod_Sup) {
+		super(num_Lote,nom_Prod,fecha_Cad,info_Esp,valor);
+		this.cod_Sup=cod_Sup;		
+}
+	// metodos getter y setter
+	
+	public int getCod_Sup() {
+		return cod_Sup;
+	}
+	public void setCod_Sup(int cod_Sup) {
+		this.cod_Sup = cod_Sup;
+	}
+	//metodo mostrar
+	@Override
+	public void mostrar(){
+		System.out.println("\nProducto refrigerado: ");
+		super.mostrar();
+		System.out.println(" codigo org. sup. alimentaria: "+getCod_Sup());
+	}
+	
+	@Override
+	public void leer() {
+		Scanner teclado=new Scanner(System.in);
+		super.leer();
+		System.out.print("Ingrese el codigo del organismo de supervision alimentaria del producto: ");
+		this.cod_Sup=teclado.nextInt();
+	}
+	
+}
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+package Herencia_Product;
+
+public class TestHerencia2 {
+	
+	public static void main (String[] args) {
+		
+		P_Fresco producto1=new P_Fresco();
+		producto1.leer();
+		
+		
+		P_Refrigerado producto2=new P_Refrigerado();
+		producto2.leer();
+		
+				
+		P_Congelado producto3=new P_Congelado();
+		producto3.leer();
+		
+		producto1.mostrar();
+		producto2.mostrar();
+		producto3.mostrar();
+	}
+}
+
+
